@@ -1,54 +1,111 @@
 'use client'
 
-import { useState } from 'react'
-import { WagmiConfig, createConfig, configureChains, mainnet } from 'wagmi'
-import { publicProvider } from 'wagmi/providers/public'
-import {
-  getDefaultWallets,
-  RainbowKitProvider,
-  ConnectButton
-} from '@rainbow-me/rainbowkit'
-import '@rainbow-me/rainbowkit/styles.css'
+import { useEffect, useState } from 'react'
+import { ethers } from 'ethers'
+import abi from '../abi/Coinflip.json'
 
-const { chains, publicClient } = configureChains([mainnet], [publicProvider()])
-const { connectors } = getDefaultWallets({
-  appName: 'Coinflip DApp',
-  projectId: '03385bd079a45ed21fad740c3705d17e', // <-- here
-  chains
-})
+const CONTRACT_ADDRESS = '0x7E975355951AF3afe1Dc7449bF891107bC85b54d'
 
-const wagmiConfig = createConfig({
-  autoConnect: true,
-  connectors,
-  publicClient
-})
+export default function Home() {
+  const [wallet, setWallet] = useState(null)
+  const [status, setStatus] = useState('')
+  const [isFlipping, setIsFlipping] = useState(false)
+  const [flipResult, setFlipResult] = useState('')
+  const [coinClass, setCoinClass] = useState('coin')
+  const [guess, setGuess] = useState(null)
 
-export default function Page() {
-  const [result, setResult] = useState(null)
+  const connectWallet = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+        setWallet(accounts[0])
+        setStatus('🟢 Wallet connected')
+      } catch (err) {
+        console.error(err)
+        setStatus('❌ Connection failed')
+      }
+    } else {
+      setStatus('😞 MetaMask not found')
+    }
+  }
 
-  const flip = () => {
-    setResult(Math.random() > 0.5 ? 'Heads' : 'Tails')
+  const flipCoin = async () => {
+    if (!guess) {
+      setStatus('Please choose Heads or Tails')
+      return
+    }
+
+    try {
+      setIsFlipping(true)
+      setStatus('🪙 Flipping the coin...')
+      setFlipResult('')
+      setCoinClass('coin flipping')
+
+      const provider = new ethers.BrowserProvider(window.ethereum)
+      const signer = await provider.getSigner()
+      const contract = new ethers.Contract(CONTRACT_ADDRESS, abi, signer)
+      const tx = await contract.flip()
+
+      await tx.wait()
+      setStatus('🎉 Flip confirmed!')
+
+      setTimeout(() => {
+        const wonFlip = Math.random() >= 0.5
+        const resultSide = wonFlip ? 'Heads' : 'Tails'
+        const userWon = guess === resultSide
+
+        setCoinClass('coin')
+        setFlipResult(userWon ? `🎯 ${resultSide} — You Won!` : `❌ ${resultSide} — You Lost!`)
+        setIsFlipping(false)
+        setGuess(null)
+      }, 5000)
+    } catch (error) {
+      console.error(error)
+      setStatus('⚠️ Flip failed')
+      setCoinClass('coin')
+      setIsFlipping(false)
+    }
   }
 
   return (
-    <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider chains={chains}>
-        <main className="text-center space-y-6">
-          <h1 className="text-4xl font-bold">🪙 Coinflip</h1>
-          <ConnectButton />
-          <button
-            onClick={flip}
-            className="px-6 py-2 bg-yellow-400 hover:bg-yellow-300 text-black rounded-xl font-semibold"
-          >
-            Flip Coin
+    <main>
+      <h1>🎮 Coin Flip Game</h1>
+
+      {wallet ? (
+        <>
+          <p className="connected">🟢 {wallet.slice(0, 6)}...{wallet.slice(-4)}</p>
+
+          <div className="guess-buttons">
+            <button
+              className={guess === 'Heads' ? 'selected' : ''}
+              onClick={() => setGuess('Heads')}
+              disabled={isFlipping}
+            >
+              Heads
+            </button>
+            <button
+              className={guess === 'Tails' ? 'selected' : ''}
+              onClick={() => setGuess('Tails')}
+              disabled={isFlipping}
+            >
+              Tails
+            </button>
+          </div>
+
+          <button onClick={flipCoin} disabled={isFlipping}>
+            {isFlipping ? 'Flipping...' : 'Flip Coin'}
           </button>
-          {result && (
-            <p className="text-2xl">
-              Result: <strong>{result}</strong>
-            </p>
-          )}
-        </main>
-      </RainbowKitProvider>
-    </WagmiConfig>
+        </>
+      ) : (
+        <button onClick={connectWallet}>Connect MetaMask</button>
+      )}
+
+      <div className={coinClass}>
+        {flipResult ? (flipResult.includes('Heads') ? 'H' : 'T') : '🪙'}
+      </div>
+
+      {flipResult && <div className="result-text">{flipResult}</div>}
+      <div className="status">{status}</div>
+    </main>
   )
 }

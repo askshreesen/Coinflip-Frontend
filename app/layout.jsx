@@ -1,16 +1,15 @@
-import './globals.css'
+// app/layout.jsx
+import '../styles/globals.css'
 
 export const metadata = {
-  title: '🪙 Coinflip',
-  description: 'Flip a coin on-chain with wallet connect!'
+  title: 'Coin Flip',
+  description: 'Flip a coin onchain with MetaMask',
 }
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="bg-gray-950 text-white flex items-center justify-center min-h-screen">
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   )
 }
