@@ -5,9 +5,18 @@ import { ethers } from 'ethers'
 import abi from '../abi/Coinflip.json'
 
 const CONTRACTS = {
-  8453: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d', // Base Mainnet
-  11155111: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d', // Sepolia
+  8453: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',     // 🟡 Base Mainnet
+  11155111: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',  // 🔵 Sepolia Testnet
+  10143: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',     // 🧿 Monad Testnet
+  50312: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',     // 🟣 Somnia Testnet
+  1: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',         // ⚫ Ethereum Mainnet
+  10: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',        // 🔴 Optimism
+  59144: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',     // 🟢 Linea
+  42161: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',     // 🔷 Arbitrum One
+  137: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',       // 🔶 Polygon Mainnet
+  43114: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',     // 🔺 Avalanche C-Chain
 }
+
 
   const CHAINS = [
   {
