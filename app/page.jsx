@@ -13,7 +13,7 @@ import '@rainbow-me/rainbowkit/styles.css'
 const { chains, publicClient } = configureChains([mainnet], [publicProvider()])
 const { connectors } = getDefaultWallets({
   appName: 'Coinflip DApp',
-  projectId: 'YOUR_PROJECT_ID',
+  projectId: '03385bd079a45ed21fad740c3705d17e', // <-- here
   chains
 })
 
