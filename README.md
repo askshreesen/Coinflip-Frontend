@@ -1,7 +1,3 @@
-Here's a polished and professional `README.md` file for your **Coinflip-Frontend** project. This will help users understand what your app does, how to run it, and how to contribute or deploy it.
-
----
-
 ## 🪙 Coinflip Game DApp
 
 > A sleek, multi-chain on-chain **Coin Flip Game** built with **Next.js**, **Ethers.js**, and full **wallet/chain integration**. Supports networks like **Base, Sepolia, Monad, Somnia, Ethereum, Optimism, Linea, and more**.
@@ -20,14 +16,6 @@ Here's a polished and professional `README.md` file for your **Coinflip-Frontend
 * 📱 Fully responsive mobile + desktop UI
 * 💥 Real-time animated coin flip
 * ⚡ Superfast UX — optimized for speed
-
----
-
-### 🖼️ Preview
-
-| Desktop View                           | Mobile View                          |
-| -------------------------------------- | ------------------------------------ |
-| ![Desktop](public/preview-desktop.png) | ![Mobile](public/preview-mobile.png) |
 
 ---
 
@@ -87,20 +75,7 @@ npm run dev
 
 App will run on: [http://localhost:3000](http://localhost:3000)
 
----
-
-### 🚀 Deployment (Netlify)
-
-1. Push your code to GitHub.
-2. Go to [Netlify](https://netlify.com)
-3. Link your GitHub repo.
-4. Set build command: `npm run build`
-5. Publish directory: `.next`
-6. Click "Deploy"
-
----
-
-### 🤝 Contributing
+--- 🤝 Contributing
 
 Pull requests are welcome! If you'd like to suggest new features, chains, or improve the UI, feel free to fork and contribute.
 
