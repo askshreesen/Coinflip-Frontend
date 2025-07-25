@@ -1,13 +1,11 @@
 /*!****************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[12].use[3]!./styles/globals.css ***!
   \****************************************************************************************************************************************************************************************************************************************************************/
-/* globals.css */
-
 body {
   margin: 0;
   padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #8EC5FC, #E0C3FC);
+  background: linear-gradient(to right, #8EC5FC, #E0C3FC);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -20,15 +18,13 @@ main {
   background: white;
   border-radius: 20px;
   box-shadow: 0 0 20px rgba(0,0,0,0.15);
-  max-width: 400px;
-  width: 90%;
-  margin: 2rem;
+  max-width: 420px;
+  width: 100%;
 }
 
 h1 {
   font-size: 1.8rem;
   color: #333;
-  margin-bottom: 1rem;
 }
 
 button {
@@ -47,19 +43,24 @@ button:hover {
   background: #3730A3;
 }
 
-button.selected {
-  background: #10B981;
+button.active {
+  background: #22c55e;
 }
 
-.status {
+.status, .wallet {
   margin-top: 1rem;
   font-weight: bold;
-  color: #1F2937;
+  color: #333;
 }
 
-.connected {
-  font-size: 0.9rem;
-  color: #4B5563;
+.choose-side {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.network-select {
   margin-bottom: 1rem;
 }
 
@@ -85,7 +86,7 @@ button.selected {
 }
 
 .flipping {
-  animation: flipAnimation 2s ease-in-out;
+  animation: flipAnimation 2s linear infinite;
 }
 
 .result-text {
@@ -93,11 +94,19 @@ button.selected {
   margin-top: 1rem;
   color: #111827;
 }
+.network-select select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  background: #f0f9ff;
+  border: 1px solid #ccc;
+  outline: none;
+  width: 100%;
+  max-width: 280px;
+  margin-bottom: 1rem;
+}
 
-.guess-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin: 1rem 0;
+.network-select select:hover {
+  border-color: #4F46E5;
 }
 
