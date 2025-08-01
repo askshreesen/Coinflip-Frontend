@@ -7,7 +7,7 @@ import abi from '../abi/Coinflip.json'
 const CONTRACTS = {
   8453: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',     // 🟡 Base Mainnet
   11155111: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',  // 🔵 Sepolia Testnet
-  10143: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',     // 🧿 Monad Testnet
+  10143: '0x022d508718De458c69bc0B4D43ecDC61E10D8d61',     // 🧿 Monad Testnet
   50312: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',     // 🟣 Somnia Testnet
   1: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',         // ⚫ Ethereum Mainnet
   10: '0x7E975355951AF3afe1Dc7449bF891107bC85b54d',        // 🔴 Optimism
